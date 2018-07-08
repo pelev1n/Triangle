@@ -1,3 +1,7 @@
+import com.sun.istack.internal.NotNull;
+
+import java.util.Objects;
+
 public class Point {
     private int x,y;
 
@@ -6,7 +10,6 @@ public class Point {
         this(0,0);
     }
 
-
     public Point(int x, int y) {
         this.x = x;
         this.y = y;
@@ -14,8 +17,9 @@ public class Point {
 
 
     public double getDistance(Point p) {
-        if(p == null) {
-            p = new Point(0,0);
+        Objects.requireNonNull(p,"Point can't be null");
+        if(this.equals(p)) {
+            throw new IllegalStateException("Points are the same");
         }
         double xLine =  Math.pow((this.x-p.x),2);
         double yLine = Math.pow((this.y-p.y),2);
@@ -25,7 +29,7 @@ public class Point {
 
     @Override
     public int hashCode() {
-        return 31 * Math.abs(x) + 31 * Math.abs(y);
+        return Objects.hashCode(Math.abs(x)+Math.abs(y));
     }
 
     public boolean equals(Object o){
@@ -39,4 +43,6 @@ public class Point {
         else
             return false;
     }
+
+
 }

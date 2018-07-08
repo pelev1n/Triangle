@@ -1,41 +1,34 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TriangleTest {
 
+
     @Test
-    void isRightTriangle()  {
+    public void testIsRightTriangle() {
 
-        Triangle tr0 = new Triangle(new Point(),new Point(),new Point());
-        assertFalse(tr0.isRightTriangle());
+        List<Triangle> rightTriangles = new ArrayList<>();
+        rightTriangles.add(new Triangle(new Point(0, 0), new Point(0, 3), new Point(4, 0)));
+        rightTriangles.add(new Triangle(new Point(-2,-3),new Point(2,1),new Point(5,-2)));
+        rightTriangles.add(new Triangle(new Point(-3,-1),new Point(3,3),new Point(-9,8)));
+        rightTriangles.add(new Triangle(new Point(1,1),new Point(-2,-5),new Point(3,0)));
 
-        Triangle tr1 = new Triangle(new Point(-2,-3),new Point(2,1),new Point(5,-2));
-        assertTrue(tr1.isRightTriangle());
+        for(Triangle triangle : rightTriangles) {
+            assertTrue(triangle.isRightTriangle());
+        }
 
-        Triangle tr2 = new Triangle(new Point(-2,-3),new Point(11,1),new Point(5,-2));
-        assertFalse(tr2.isRightTriangle());
+        List<Triangle> nonRightTriangles = new ArrayList<>();
+        nonRightTriangles.add(new Triangle(new Point(0,0), new Point(1,0), new Point(4,2)));
+        nonRightTriangles.add(new Triangle(new Point(-2,-3),new Point(11,1),new Point(5,-2)));
+        nonRightTriangles.add(new Triangle(new Point(-2,-1),new Point(2,1),new Point(5,-2)));
+        nonRightTriangles.add(new Triangle(new Point(-3,-2),new Point(3,5),new Point(-9,8)));
 
-        Triangle tr3 = new Triangle(new Point(-2,-1),new Point(2,1),new Point(5,-2));
-        assertFalse(tr3.isRightTriangle());
-
-        Triangle tr4 = new Triangle(new Point(-3,-1),new Point(3,3),new Point(-9,8));
-        assertTrue(tr4.isRightTriangle());
-
-        Triangle tr5 = new Triangle(new Point(-3,-2),new Point(3,5),new Point(-9,8));
-        assertFalse(tr5.isRightTriangle());
-
-        Triangle tr6 = new Triangle(new Point(1,1),new Point(-2,-5),new Point(3,0));
-        assertTrue(tr6.isRightTriangle());
-
-        Triangle tr7 = new Triangle(new Point(-1,1),new Point(-2,-5),new Point(3,0));
-        assertFalse(tr7.isRightTriangle());
-
-        Triangle tr8 = new Triangle(new Point(2, 3), null, null);
-        assertFalse(tr8.isRightTriangle());
-
-        Triangle tr9 = new Triangle(null, null, null);
-        assertFalse(tr9.isRightTriangle());
-
+        for (Triangle triangle : nonRightTriangles) {
+            assertFalse(triangle.isRightTriangle());
+        }
     }
 }
