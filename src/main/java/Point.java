@@ -23,8 +23,13 @@ public class Point {
 
     }
 
+    @Override
+    public int hashCode() {
+        return 31 * Math.abs(x) + 31 * Math.abs(y);
+    }
 
     public boolean equals(Object o){
+        if(this == o) return true;
         if(o == null) return false;
         if(o.getClass()!=Point.class)
             return false;
